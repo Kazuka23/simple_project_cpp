@@ -1,69 +1,56 @@
 #include <iostream>
+#include <vector>
 #include <string>
+#include <chrono>
+#include <ctime>
+#include <iomanip>
 using namespace std;
+using namespace std::chrono;
 
-string coffee[5] = {"Espresso", "Americano", "Latte", "Cappuccino", "Mocha"};
-string noncoffee[6] = {"Tea", "Hot Chocolate", "Lemonade", "Soda", "Water", "Matcha"};
-string snack[5] = {"Croissant", "Muffin", "Bagel", "Donut", "Brownie"};
-string dessert[5] = {"Cheesecake", "Ice Cream", "Pudding", "Tiramisu", "Macaron"};
+// List harga barang di toko alat tulis
+// Pensil dan Pulpen: Rp2.000 per satuan
+// Penghapus: Rp1.000 per satuan
+// Penggaris: Rp3.000 per satuan
+// TipeX: Rp3.000 per satuan
+// Buku: Rp5.000 per satuan
 
-int list_harga[4][6] = {
-    {30000, 35000, 40000, 45000, 50000},
-    {20000, 25000, 30000, 35000, 40000, 45000},
-    {15000, 20000, 25000, 30000, 35000},
-    {25000, 30000, 35000, 40000, 45000}
-};
+void Waktu() {
+    auto sekarang = system_clock::now();
+    time_t waktu_c = system_clock::to_time_t(sekarang);
+    tm* waktu_lokal = localtime(&waktu_c);
 
-int main () {
-    cout << "Welcome to the Coffee Shop!" << endl;
-    cout << "Menu:" << endl;
+    cout << "Waktu:  " 
+         << put_time(waktu_lokal, "%d-%m-%Y %H:%M:%S") 
+         << endl;
+}
 
-    cout << "\nCoffee:" << endl;
-    for (int i = 0; i < 5; i++) {
-        cout << i + 1 << ". " << coffee[i] << " - Rp" << list_harga[0][i] << endl;
-    }
+void strip() {
+    cout << "=================================================================\n";
+}
 
-    cout << "\nNon-Coffee Beverages:" << endl;
-    for (int i = 0; i < 6; i++) {
-        cout << i + 1 << ". " << noncoffee[i] << " - Rp" << list_harga[1][i] << endl;
-    }
+int main() {
+    vector<string> barang;
+    vector<
 
-    cout << "\nSnacks:" << endl;
-    for (int i = 0; i < 5; i++) {
-        cout << i + 1 << ". " << snack[i] << " - Rp" << list_harga[2][i] << endl;
-    }
+    cout << "Selamat Datang di Toko Buku Pak Dengklek!\n";
+    cout << "Nama barang: ";
+    cin >> barang;
+    cout << "Harga: ";
+    cin >> harga;
+    cout << "Jumlah: ";
+    cin >> jumlah;
+    cout << endl;
 
-    cout << "\nDesserts:" << endl;
-    for (int i = 0; i < 5; i++) {
-        cout << i + 1 << ". " << dessert[i] << " - Rp" << list_harga[3][i] << endl;
-    }
+    strip();
+    cout << "INVOICE TOKO BUKU PAK DENGKLEK\n";
+    cout << "JL. KWAK No. 1, KEL TERNAK BEBEK, KEC BEBEK BERKAH, KOTA BEBEK\n";
+    strip();
+    Waktu();
+    strip();
+    cout << "Barang: " << barang << endl;
+    cout << "Harga: " << harga << endl;
+    cout << "Jumlah: " << jumlah << endl;
 
-    cout << "Would you like to place an order? (yes/no): ";
-    string order;
-    cin >> order;
-    if (order == "yes") {
-        cout << "Please enter the item number you would like to order: ";
-        int itemNumber;
-        cin >> itemNumber;
 
-        if (itemNumber >= 1 && itemNumber <= 5) {
-            cout << "You have ordered: " << coffee[itemNumber - 1] << endl;
-            cout << "Price: Rp" << list_harga[0][itemNumber - 1] << endl;
-        } else if (itemNumber >= 6 && itemNumber <= 11) {
-            cout << "You have ordered: " << noncoffee[itemNumber - 6] << endl;
-            cout << "Price: Rp" << list_harga[1][itemNumber - 6] << endl;
-        } else if (itemNumber >= 12 && itemNumber <= 16) {
-            cout << "You have ordered: " << snack[itemNumber - 12] << endl;
-            cout << "Price: Rp" << list_harga[2][itemNumber - 12] << endl;
-        } else if (itemNumber >= 17 && itemNumber <= 21) {
-            cout << "You have ordered: " << dessert[itemNumber - 17] << endl;
-            cout << "Price: Rp" << list_harga[3][itemNumber - 17] << endl;
-        } else {
-            cout << "Invalid item number." << endl;
-        }
-    } else {
-        cout << "Thank you for visiting!" << endl;
-    }
 
-    return 0;
 }
